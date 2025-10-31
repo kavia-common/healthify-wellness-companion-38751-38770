@@ -1,8 +1,16 @@
 import { render, screen } from '@testing-library/react';
+import { BrowserRouter } from 'react-router-dom';
+import { StoreProvider } from './state/StoreProvider';
 import App from './App';
 
-test('renders learn react link', () => {
-  render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+test('renders Healthify brand in navbar', () => {
+  render(
+    <StoreProvider>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </StoreProvider>
+  );
+  const brand = screen.getByText(/Healthify/i);
+  expect(brand).toBeInTheDocument();
 });

@@ -1,49 +1,31 @@
-import React, { useState, useEffect } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { useEffect } from 'react';
+import { useStore } from './state/StoreProvider';
+import NavBar from './components/NavBar';
+import TabNav from './components/TabNav';
+import AppRoutes from './routes/AppRoutes';
+import RetroDecor from './components/RetroDecor';
 
 // PUBLIC_INTERFACE
-function App() {
-  const [theme, setTheme] = useState('light');
+export default function App() {
+  /**
+   * App root for Healthify.
+   * Applies theme to document element and renders navigation + routes.
+   */
+  const { state } = useStore();
 
-  // Effect to apply theme to document element
   useEffect(() => {
-    document.documentElement.setAttribute('data-theme', theme);
-  }, [theme]);
-
-  // PUBLIC_INTERFACE
-  const toggleTheme = () => {
-    setTheme(prevTheme => prevTheme === 'light' ? 'dark' : 'light');
-  };
+    document.documentElement.setAttribute('data-theme', state.ui.theme);
+  }, [state.ui.theme]);
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <button 
-          className="theme-toggle" 
-          onClick={toggleTheme}
-          aria-label={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
-        >
-          {theme === 'light' ? '🌙 Dark' : '☀️ Light'}
-        </button>
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <p>
-          Current theme: <strong>{theme}</strong>
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="App" style={{ minHeight: '100vh', position: 'relative' }}>
+      <div className="retro-decor" aria-hidden="true" />
+      <NavBar />
+      <TabNav />
+      <main className="container page">
+        <AppRoutes />
+      </main>
+      <RetroDecor />
     </div>
   );
 }
-
-export default App;

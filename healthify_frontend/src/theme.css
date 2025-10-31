@@ -1,0 +1,193 @@
+:root {
+  /* Ocean Professional palette */
+  --ocean-primary: #2563EB;   /* Blue-600 */
+  --ocean-secondary: #F59E0B; /* Amber-500 */
+  --ocean-error: #EF4444;     /* Red-500 */
+
+  --bg: #f9fafb;              /* Gray-50 */
+  --surface: #ffffff;         /* White */
+  --text: #111827;            /* Gray-900 */
+  --muted: #6b7280;           /* Gray-500 */
+
+  --card-shadow: 0 8px 24px rgba(37, 99, 235, 0.08);
+  --ring: 0 0 0 2px rgba(37, 99, 235, 0.15);
+
+  /* Retro accents */
+  --retro-amber: #F59E0B;
+  --retro-grid: rgba(37, 99, 235, 0.08);
+
+  /* Spacing and radius */
+  --radius: 14px;
+  --radius-sm: 10px;
+  --radius-lg: 18px;
+}
+
+[data-theme="dark"] {
+  --bg: #0b1220;              /* Deep navy */
+  --surface: #0f172a;         /* Slate-900 */
+  --text: #e5e7eb;            /* Gray-200 */
+  --muted: #9ca3af;           /* Gray-400 */
+  --card-shadow: 0 10px 28px rgba(0,0,0,0.35);
+  --ring: 0 0 0 2px rgba(59, 130, 246, 0.35);
+  --retro-grid: rgba(59, 130, 246, 0.10);
+}
+
+html, body, #root {
+  height: 100%;
+  background: var(--bg);
+  color: var(--text);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.container {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 16px;
+}
+
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  backdrop-filter: blur(8px);
+  background: linear-gradient(180deg, rgba(255,255,255,0.8), rgba(255,255,255,0.6));
+  border-bottom: 1px solid rgba(37, 99, 235, 0.08);
+}
+[data-theme="dark"] .navbar {
+  background: linear-gradient(180deg, rgba(15,23,42,0.8), rgba(15,23,42,0.6));
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+
+.nav-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 16px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-weight: 800;
+  letter-spacing: 0.3px;
+}
+.brand-badge {
+  display: inline-grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, var(--ocean-primary), #4f46e5);
+  color: white;
+  box-shadow: 0 8px 20px rgba(37,99,235,0.35);
+  font-size: 18px;
+}
+
+.theme-btn {
+  padding: 8px 12px;
+  border-radius: 10px;
+  background: var(--surface);
+  border: 1px solid rgba(17,24,39,0.08);
+  color: var(--ocean-primary);
+  font-weight: 700;
+  letter-spacing: 0.2px;
+  box-shadow: var(--card-shadow);
+  transition: transform 160ms ease, box-shadow 160ms ease;
+}
+.theme-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 12px 30px rgba(37,99,235,0.12);
+}
+
+.tabnav {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 8px;
+  padding: 10px 16px 18px;
+  background: transparent;
+  border-bottom: 1px dashed rgba(37, 99, 235, 0.15);
+}
+.tablink {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border-radius: 12px;
+  padding: 10px;
+  background: var(--surface);
+  border: 1px solid rgba(17,24,39,0.08);
+  color: var(--muted);
+  box-shadow: var(--card-shadow);
+  transition: all 150ms ease;
+  font-weight: 700;
+}
+.tablink.active {
+  color: var(--ocean-primary);
+  border-color: rgba(37, 99, 235, 0.25);
+  box-shadow: 0 10px 30px rgba(37,99,235,0.14);
+}
+
+.card {
+  background: var(--surface);
+  border: 1px solid rgba(17,24,39,0.08);
+  border-radius: var(--radius);
+  box-shadow: var(--card-shadow);
+  padding: 16px;
+}
+
+.card-title {
+  font-weight: 800;
+  margin: 2px 0 10px 0;
+  letter-spacing: 0.2px;
+}
+
+.stat-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: linear-gradient(135deg, rgba(37,99,235,0.08), rgba(245, 158, 11, 0.08));
+  color: var(--ocean-primary);
+  border: 1px dashed rgba(37, 99, 235, 0.25);
+  padding: 8px 12px;
+  border-radius: 9999px;
+  font-weight: 800;
+}
+
+.grid {
+  display: grid;
+  gap: 16px;
+}
+
+.grid.cols-2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+.grid.cols-3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+@media (max-width: 900px) {
+  .grid.cols-2, .grid.cols-3 {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Subtle retro decor background using a radial grid */
+.retro-decor {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    radial-gradient(ellipse at top left, var(--retro-grid) 0, transparent 60%),
+    radial-gradient(ellipse at bottom right, var(--retro-grid) 0, transparent 60%);
+  mask-image: radial-gradient(ellipse at center, rgba(0,0,0,0.7), transparent 70%);
+}
+
+.page {
+  position: relative;
+  padding: 16px;
+}
